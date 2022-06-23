@@ -190,7 +190,7 @@ def individual_analysis(bids_path, ID, srate=0.6, short=True):
     
     # Save GLM 
     import pickle
-    filepath='C:/Users/nojegou/Documents/Python Scripts/GLMsessGLMsess/'+ID+'lukeModifiedPipeline.pkl'
+    filepath='C:/Users/nojegou/Documents/Python Scripts/GLMsessGLMsess/'+ID+'lukeModifiedPipeline1sess.pkl'
     open(filepath,"x")
     with open(filepath, 'wb') as config_GLMobj:
         pickle.dump(glm_est,config_GLMobj) 
