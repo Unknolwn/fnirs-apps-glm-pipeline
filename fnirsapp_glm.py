@@ -177,7 +177,7 @@ def individual_analysis(bids_path, ID, srate=0.6, short=True):
     logger.info(f"    Fitting HRF with duration {stim_dur} seconds.")
 
     # Create a design matrix
-    design_matrix = make_first_level_design_matrix(raw_haemo,
+    design_matrix = make_first_level_design_matrix(raw_haemo, high_pass=0.0111,
                                                    stim_dur=stim_dur)
 
     # Append short channels mean to design matrix
@@ -187,7 +187,14 @@ def individual_analysis(bids_path, ID, srate=0.6, short=True):
 
     # Run GLM
     glm_est = run_glm(raw_haemo, design_matrix)
-
+    
+    # Save GLM 
+    import pickle
+    filepath='C:/Users/nojegou/Documents/Python Scripts/GLMsessGLMsess/'+ID+'lukeModifiedPipeline.pkl'
+    open(filepath,"x")
+    with open(filepath, 'wb') as config_GLMobj:
+        pickle.dump(glm_est,config_GLMobj) 
+        
     # Extract channel metrics
     channel_df = glm_est.to_dataframe()
     channel_df["ID"] = ID  # Add the participant ID to the dataframe
