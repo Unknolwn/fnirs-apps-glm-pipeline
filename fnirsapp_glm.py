@@ -159,7 +159,8 @@ def individual_analysis(bids_path, ID, srate=0.6, short=True):
     raw_od = optical_density(raw_intensity)
     raw_haemo = beer_lambert_law(raw_od)
     logger.info(f"    Resampling to {srate} Hz")
-    raw_haemo.resample(srate, verbose=True)
+    #raw_haemo.resample(srate, verbose=True)
+    raw_haemo.filter(0.01, 0.09, l_trans_bandwidth=0.01,h_trans_bandwidth=0.01, method='fir')
 
     if short:
         # Cut out just the short channels for creating a GLM repressor
